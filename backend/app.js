@@ -29,6 +29,6 @@ app.use(express.urlencoded({ extended: true })); //parse les requêtes en urlenc
 
 const allRoutes = require("./routes/router");
 
-app.use("/category", categoryController.browse);
+/*app.use("/category", categoryController.browse);*/
 
 app.listen(port, () => console.log("server is running port" + 5000));
