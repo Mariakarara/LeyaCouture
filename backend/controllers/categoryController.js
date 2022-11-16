@@ -1,83 +1,17 @@
-const models = require("../models");
+import express from "express";
+import categoryModel from "../models/categoryModel.js";
 
-class categoryController {
-  static browse = (req, res) => {
-    models.category
+const router = express.Router();
+
+router.get("/", async (req, res) => {
+  try {
+    const category = await categoryModel
       .getAll()
-      .then(([rows]) => {
-        res.send(rows);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
+      .res.stutus(200)
+      .json(category);
+  } catch (err) {
+    res.status(500).send(" Error server, try again !");
+  }
+});
 
-  static read = (req, res) => {
-    models.category
-      .find(req.params.id)
-      .then(([rows]) => {
-        if (rows[0] == null) {
-          res.sendStatus(404);
-        } else {
-          res.send(rows[0]);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
-
-  static edit = (req, res) => {
-    const category = req.body;
-
-    // TODO validations (length, format...)
-
-    category.id = req.params.id;
-
-    models.category
-      .update(category)
-      .then(([result]) => {
-        if (result.affectedRows === 0) {
-          res.sendStatus(404);
-        } else {
-          res.sendStatus(204);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
-
-  static add = (req, res) => {
-    const category = req.body;
-
-    // TODO validations (length, format...)
-
-    models.category
-      .insert(category)
-      .then(([result]) => {
-        res.status(201).send({ ...category, id: result.insertId });
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
-
-  static delete = (req, res) => {
-    models.category
-      .delete(req.params.id)
-      .then(() => {
-        res.sendStatus(204);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
-}
-
-module.exports = categoryController;
+export default router;
