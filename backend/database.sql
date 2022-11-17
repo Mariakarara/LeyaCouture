@@ -49,8 +49,8 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS `couture`.`Category` (
         `id` INT NOT NULL,
-        `Robes` VARCHAR(45) NULL,
-        `Accessoire` VARCHAR(45) NULL,
+        `Robes` VARCHAR(255) NULL,
+        `Accessoires` VARCHAR(255) NULL,
         PRIMARY KEY (`id`)
     ) ENGINE = InnoDB;
 

@@ -1,10 +1,9 @@
 import dbConnect from "../config/db-config.js";
 
-export const getAll = () => {
-  return new Promise((resolve, reject) => {
-    dbConnect.query(`SELECT * FROM category where id = ?`, (err, results) => {
-      if (err) reject(err);
-      else resolve(results);
-    });
-  });
+const categoryProduct = {
+  getAll: async () => {
+    const result = await dbConnect.query(`SELECT * FROM category `);
+    return result[0];
+  },
 };
+export default categoryProduct;
