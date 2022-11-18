@@ -1,4 +1,4 @@
-import mysql from "mysql2/promise";
+/*import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 
 dotenv.config(process.cwd(), ".env");
@@ -10,4 +10,4 @@ const dbConnect = await mysql.createConnection({
   database: process.env.DB_NAME,
 });
 
-export default dbConnect;
+export default dbConnect;*/

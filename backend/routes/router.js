@@ -1,11 +1,20 @@
-import express from "express";
-import categoryController from "../controllers/categoryController.js";
+const express = require("express");
+/*
+const {
+  UserController,
+  ArtworkController,
+  FilterController,
+  SkillsController,
+  ContractTypeController,
+  UserTypeController,
+  TypeAccountController,
+  SoftwareController,
+  BudgetController,
+  TimeframeController,
+  MailController,
+  ProfilController,
+} = require("./controllers");*/
 
 const router = express.Router();
 
-/*export const setupRoutes = (app) => {
-  app.use("/category", categoryController);
-};*/
-router.get("/category", categoryController.getCategory);
-
-export default router;
+module.exports = router;
