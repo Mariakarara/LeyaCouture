@@ -1,13 +1,18 @@
-/*import mysql from "mysql2/promise";
-import dotenv from "dotenv";
+const mysql = require("mysql2/promise");
+const dotenv = require("dotvenv");
 
-dotenv.config(process.cwd(), ".env");
-console.log("db_user", process.env.DB_USER);
-const dbConnect = await mysql.createConnection({
+dotenv.config({ path: "./db-config.env" });
+
+const dbConnect = mysql.createConnection({
   host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 });
 
-export default dbConnect;*/
+dbConnect.connect((err) => {
+  if (err) console.log("MySQL connection error: ", err);
+  else console.log("Msql connected successfully");
+});
+export default dbConnect;

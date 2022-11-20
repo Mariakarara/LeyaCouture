@@ -1,4 +1,4 @@
-require("dotenv").config();
+/*require("dotenv").config();
 
 const fs = require("fs");
 const mysql = require("mysql2/promise");
@@ -29,4 +29,4 @@ try {
   migrate();
 } catch (err) {
   console.error(err);
-}
+}*/

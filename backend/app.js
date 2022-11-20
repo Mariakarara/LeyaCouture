@@ -1,13 +1,18 @@
 const express = require("express");
+const app = express();
 const path = require("path");
 
 const cors = require("cors");
 
-// let's create express app
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
 
-const app = express();
+// création de que quelque middlewere
+// mise en place d'un middleware afin de gérer le form data
+app.use(express.urlencoded({ extended: true }));
 
-// use some application-level middlewares
 app.use(
   cors({
     origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
@@ -15,10 +20,14 @@ app.use(
   })
 );
 
+// middleware pour le json
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../public")));
+
+// gestion des fichiers statiques
+app.use(express.static(path.join(__dirname, "/public")));
 // load router
 const router = require("./routes/router");
+
 app.use(router);
 
 // ready to export
