@@ -1,0 +1,136 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model cart {
+  id                  Int                 @id
+  User_id             Int
+  delivery_firstName  String              @db.VarChar(45)
+  delivery_lastName   String              @db.VarChar(45)
+  delivery_adress     String              @db.VarChar(45)
+  delivery_postalCode Int
+  delivery_city       String              @db.VarChar(45)
+  payment_type        Int
+  status_id           Int
+  delivery_price      Int
+  total_price         Int
+  date                DateTime            @db.Date
+  user                user                @relation(fields: [User_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_cartUser_id")
+  many_product_cart   many_product_cart[]
+
+  @@index([User_id], map: "User_id_idx")
+}
+
+model category {
+  id          Int       @id
+  Robes       String?   @db.VarChar(255)
+  Accessoires String?   @db.VarChar(255)
+  product     product[]
+}
+
+model many_product_cart {
+  id         Int     @id
+  cart_id    Int
+  product_id Int
+  cart       cart    @relation(fields: [cart_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_cart_id")
+  product    product @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_manyproduct_id")
+
+  @@index([cart_id], map: "cart_id_idx")
+  @@index([product_id], map: "product_id_idx")
+}
+
+model many_product_order {
+  id         Int     @id
+  product_id Int
+  order_id   Int
+  product    product @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_manyorderproduct_id")
+  order      order   @relation(fields: [order_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_order_id")
+
+  @@index([order_id], map: "order_id_idx")
+  @@index([product_id], map: "product_id_idx")
+}
+
+model material {
+  id       Int       @id @default(autoincrement())
+  Cotton   String?   @db.VarChar(45)
+  Satin    String?   @db.VarChar(45)
+  Sythetic String?   @db.VarChar(45)
+  Lin      String?   @db.VarChar(45)
+  product  product[]
+}
+
+model order {
+  id                  Int                  @id
+  User_id             Int
+  delivery_firstName  String               @db.VarChar(45)
+  delivery_lastName   String               @db.VarChar(45)
+  delivery_adress     String               @db.VarChar(45)
+  delivery_postalCode Int
+  delivery_city       String               @db.VarChar(45)
+  payment_type        Int
+  delivery_price      Int
+  total_price         Int
+  date                DateTime             @db.Date
+  user                user                 @relation(fields: [User_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_id")
+  many_product_order  many_product_order[]
+
+  @@index([User_id], map: "User_id_idx")
+}
+
+model product {
+  id                 Int                  @id @default(autoincrement())
+  Title              String               @db.VarChar(45)
+  Image1             String               @db.VarChar(45)
+  Image2             String               @db.VarChar(45)
+  Price              Decimal              @db.Decimal(10, 2)
+  Age                Decimal              @db.Decimal(2, 0)
+  Description        String               @db.Text
+  Material_id        Int
+  Category_id        Int
+  Color              String               @db.Text
+  category           category             @relation(fields: [Category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_Category_id")
+  material           material             @relation(fields: [Material_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_Material_id")
+  many_product_cart  many_product_cart[]
+  many_product_order many_product_order[]
+  rate_comment       rate_comment[]
+
+  @@index([Category_id], map: "Category_id_idx")
+  @@index([Material_id], map: "Material_id_idx")
+}
+
+model rate_comment {
+  id         Int      @id
+  Rate_id    Int?
+  User_id    Int?
+  Product_id Int?
+  Comment    String?  @db.Text
+  isVisible  Int?     @db.TinyInt
+  product    product? @relation(fields: [Product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_Product_id")
+  rates      rates?   @relation(fields: [Rate_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_Rate_id")
+  user       user?    @relation(fields: [User_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_commentUser_id")
+
+  @@index([Product_id], map: "Product_id_idx")
+  @@index([Rate_id], map: "Rate_id_idx")
+  @@index([User_id], map: "User_id_idx")
+}
+
+model rates {
+  id           Int            @id
+  Note         Int?
+  rate_comment rate_comment[]
+}
+
+model user {
+  id            Int            @id
+  email         String?        @db.VarChar(45)
+  isAdmin       Boolean?
+  FirstName     String?        @db.VarChar(45)
+  LastName      String?        @db.VarChar(45)
+  PostalCode    String?        @db.VarChar(45)
+  City          Int?
+  Password_word String?        @map("Password word") @db.VarChar(45)
+  cart          cart[]
+  order         order[]
+  rate_comment  rate_comment[]
+}

@@ -1,12 +1,19 @@
-require("dotenv").config();
-const app = require("./app");
+/*const { PrismaClient } = require("@prisma/client");
 
-const port = parseInt(process.env.APP_PORT ?? "8000", 10);
+const prisma = new PrismaClient();
 
-app.listen(port, (err) => {
-  if (err) {
-    console.error("Something bad happened");
-  } else {
-    console.log(`Server is listening on ${port}`);
-  }
-});
+main(async function main() {
+  // ... you will write your Prisma Client queries here
+  const allCategories = await prisma.category.findMany();
+  console.log(allCategories);
+})
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
+
+export default prisma;*/

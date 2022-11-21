@@ -1,5 +1,7 @@
-const mysql = require("mysql2/promise");
-const dotenv = require("dotvenv");
+/*import mysql from "mysql2";
+import dotenv from "dotenv";
+
+
 
 dotenv.config({ path: "./db-config.env" });
 
@@ -15,4 +17,4 @@ dbConnect.connect((err) => {
   if (err) console.log("MySQL connection error: ", err);
   else console.log("Msql connected successfully");
 });
-export default dbConnect;
+export default dbConnect;*/

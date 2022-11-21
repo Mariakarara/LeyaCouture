@@ -1,9 +1,12 @@
-import migrate from "../migrate.js";
+/*import dbConnect from "../config/db-config.js";
 
-const categoryProduct = {
-  getAll: async () => {
-    const result = await connection.query(`SELECT * FROM category`);
-    return result[0];
-  },
+const getAll = () => {
+  return new Promise((resolve, reject) => {
+    dbConnect.query("SELECT * FROM category", (err, results) => {
+      if (err) reject(err);
+      else resolve(results);
+    });
+  });
 };
-export default categoryProduct;
+
+export default { getAll };*/

@@ -1,20 +1,15 @@
-const express = require("express");
-/*
-const {
-  UserController,
-  ArtworkController,
-  FilterController,
-  SkillsController,
-  ContractTypeController,
-  UserTypeController,
-  TypeAccountController,
-  SoftwareController,
-  BudgetController,
-  TimeframeController,
-  MailController,
-  ProfilController,
-} = require("./controllers");*/
+const router = require("express").Router();
+import { PrismaClient } from "@prisma/client";
 
-const router = express.Router();
+const prisma = new PrismaClient();
+
+router.get("/category", async (req, res, next) => {
+  try {
+    const category = await prisma.category.findMany({});
+    res.json(category);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
