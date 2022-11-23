@@ -1,11 +1,7 @@
 import express from "express";
 
-import { categoryController } from "../controllers";
+import { categoryController } from "../controllers/categoryController.js";
 
-router.get("/", categoryController.getAll);
-router.get("/:id", categoryController.get);
-router.post("/", categoryController.create);
-router.put("/", categoryController.update);
-router.delete("/", categoryController.delete);
-
-export default router;
+export const setupRoutes = (app) => {
+  app.use("/category", categoryController);
+};

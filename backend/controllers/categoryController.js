@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const { category: Category } = prisma;
 
-export default {
+const categoryController = {
   getAll(req, res) {
     Category.findMany()
       .then((data) => {
@@ -96,3 +96,5 @@ export default {
       });
   },
 };
+
+export default categoryController;

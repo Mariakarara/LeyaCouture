@@ -1,4 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import categoryController from "./controllers/";
+
+export { categoryController };
+
+/*import { PrismaClient } from "@prisma/client";
 
 export const prisma = new PrismaClient();
 
@@ -15,4 +19,4 @@ main()
     console.error(e);
     await prisma.$connect();
     process.exit(1);
-  });
+  });*/
