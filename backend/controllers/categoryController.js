@@ -81,7 +81,7 @@ const categoryController = {
 
   delete(req, res) {
     const { id } = req.params;
-    Category.delate({
+    Category.delete({
       where: {
         id: parseInt(id),
       },

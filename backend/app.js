@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { setupRoutes } from "./routes/router.js";
 
 //Import du fichier de gestion des routes
 
@@ -26,14 +25,8 @@ app.use((req, res, next) => {
   next();
 });
 // vérifier la connection
-app.get("/", (req, res) => {
-  res.status(200).json({
-    message: "server is working",
-  });
-});
 
 // Serveur est routée grâce à cette ligne
-setupRoutes(app);
 
 app.listen(process.env.PORT, () =>
   console.log("Server is running on port" + port)

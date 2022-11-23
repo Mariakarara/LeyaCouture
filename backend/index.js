@@ -1,4 +1,4 @@
-import categoryController from "./controllers/";
+import categoryController from "./controllers/categoryController.js";
 
 export { categoryController };
 
