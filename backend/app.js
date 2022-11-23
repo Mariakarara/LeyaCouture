@@ -3,7 +3,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 //Import du fichier de gestion des routes
-import router from "./routes/router.js";
 
 //const path = require("path");
 //const cors = require("cors");

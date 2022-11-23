@@ -1,19 +1,18 @@
-/*const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
-main(async function main() {
-  // ... you will write your Prisma Client queries here
+async function main() {
   const allCategories = await prisma.category.findMany();
-  console.log(allCategories);
-})
+  console.log(allCategories); // ... you will write your Prisma Client queries here
+}
+
+main()
   .then(async () => {
-    await prisma.$disconnect();
+    await prisma.$connect();
   })
   .catch(async (e) => {
     console.error(e);
-    await prisma.$disconnect();
+    await prisma.$connect();
     process.exit(1);
   });
-
-export default prisma;*/

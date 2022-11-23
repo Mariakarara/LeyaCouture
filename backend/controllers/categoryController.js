@@ -1,58 +1,98 @@
 import { PrismaClient } from "@prisma/client";
-
 const prisma = new PrismaClient();
-import express from "express";
+const { category: Category } = prisma;
 
-const app = express();
+export default {
+  getAll(req, res) {
+    Category.findMany()
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((error) => {
+        res.statut(500).send({
+          message: "an arror accourded",
+        });
+      });
+  },
+  get(req, res) {
+    const { id } = req.params;
+    Category.findUnique({
+      where: {
+        id: parseInt(id),
+      },
+    })
+      .then((data) => {
+        data
+          ? res.status(200).send(data)
+          : res.status(404).send({ message: `cannot find id=${id}` });
+      })
+      .catch((error) => {
+        res.status(500).send({
+          message: `an arror accourded when retryving users with id=${id}`,
+        });
+      });
+  },
 
-app.get("/feed", async (req, res) => {
-  const posts = await prisma.post.findMany({
-    where: { published: true },
+  create(req, res) {
+    const { id } = req.params;
+    const { Robes } = req.body;
 
-    include: { author: true },
-  });
+    Category.create({
+      where: {
+        id: parseInt(id),
+      },
+      data: {
+        Robes: Robes,
+      },
+    })
+      .then(() => {
+        res
+          .status(201)
+          .send({ message: "New category was created successfully" });
+      })
+      .catch((error) => {
+        res.status(500).send({
+          message: "an arror accourded when creating new category",
+        });
+      });
+  },
 
-  res.json(posts);
-});
+  update(req, res) {
+    const { id } = req.params;
+    const { Robes } = req.body;
 
-app.post("/post", async (req, res) => {
-  const { title, content, authorEmail } = req.body;
+    Category.update({
+      where: {
+        id: parseInt(id),
+      },
+      data: {
+        Robes: Robes,
+      },
+    })
+      .then(() => {
+        res.status(200).send({ message: "user was updated successfully" });
+      })
+      .catch((error) => {
+        res.status(500).send({
+          message: `an arror accourded when updating user with id=${id}`,
+        });
+      });
+  },
 
-  const post = await prisma.post.create({
-    data: {
-      title,
-
-      content,
-
-      published: false,
-
-      author: { connect: { email: authorEmail } },
-    },
-  });
-
-  res.json(post);
-});
-
-app.put("/publish/:id", async (req, res) => {
-  const { id } = req.params;
-
-  const post = await prisma.post.update({
-    where: { id },
-
-    data: { published: true },
-  });
-
-  res.json(post);
-});
-
-app.delete("/user/:id", async (req, res) => {
-  const { id } = req.params;
-
-  const user = await prisma.user.delete({
-    where: {
-      id,
-    },
-  });
-
-  res.json(user);
-});
+  delete(req, res) {
+    const { id } = req.params;
+    Category.delate({
+      where: {
+        id: parseInt(id),
+      },
+    })
+      .then((data) => {
+        res.status(200).send({ message: `cannot find id=${id}` });
+      })
+      .catch((error) => {
+        res
+          .status(500)
+          .send({ message: `an arror accourded when deleting with id=${id}` });
+      });
+  },
+};

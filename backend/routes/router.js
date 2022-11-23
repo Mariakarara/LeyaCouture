@@ -1,15 +1,11 @@
-const router = require("express").Router();
-import { PrismaClient } from "@prisma/client";
+import express from "express";
 
-const prisma = new PrismaClient();
+import { categoryController } from "../controllers";
 
-router.get("/category", async (req, res, next) => {
-  try {
-    const category = await prisma.category.findMany({});
-    res.json(category);
-  } catch (error) {
-    next(error);
-  }
-});
+router.get("/", categoryController.getAll);
+router.get("/:id", categoryController.get);
+router.post("/", categoryController.create);
+router.put("/", categoryController.update);
+router.delete("/", categoryController.delete);
 
-module.exports = router;
+export default router;
