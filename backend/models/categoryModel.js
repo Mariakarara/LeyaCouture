@@ -1,12 +1,28 @@
-/*import dbConnect from "../config/db-config.js";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
-const getAll = () => {
-  return new Promise((resolve, reject) => {
-    dbConnect.query("SELECT * FROM category", (err, results) => {
-      if (err) reject(err);
-      else resolve(results);
-    });
+/*model category {
+  id          Int       @id
+  Robes       String?   @db.VarChar(255)
+  Accessoires String?   @db.VarChar(255)
+  product     product[]
+}*/
+async function main() {
+  const category = await prisma.category.create({
+    data: {
+      Robes: "Petites filles",
+      Accessoires: "Trousses",
+    },
   });
-};
+}
 
-export default { getAll };*/
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
+
+export default category;
