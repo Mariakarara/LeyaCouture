@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 //Import du fichier de gestion des routes
 
@@ -24,6 +26,7 @@ app.use((req, res, next) => {
   res.header("Access-Controll-Allow-Methods", "GET,POST,PUT,DELETE");
   next();
 });
+
 // vérifier la connection
 
 // Serveur est routée grâce à cette ligne

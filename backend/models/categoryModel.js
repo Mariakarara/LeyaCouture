@@ -1,21 +1,20 @@
-import { PrismaClient } from "@prisma/client";
+/*import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-/*model category {
-  id          Int       @id
-  Robes       String?   @db.VarChar(255)
-  Accessoires String?   @db.VarChar(255)
-  product     product[]
-}*/
+
 async function main() {
-  const category = await prisma.category.create({
+  const allCategory = await prisma.category.create({
     data: {
       Robes: "Petites filles",
       Accessoires: "Trousses",
     },
   });
+  const post = await prisma.category.update({
+    where: { id: 1 },
+    data: { published: true },
+  });
+  console.log(category);
 }
-
 main()
   .catch((e) => {
     console.error(e);
@@ -23,6 +22,4 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
-  });
-
-export default category;
+  });*/

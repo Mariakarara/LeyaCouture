@@ -1,6 +1,40 @@
-import { PrismaClient } from "@prisma/client";
+/*import express from 'express';
+import categoryModel from '../models/categoryModel.js
+
+const router = express.Router();
+
+router.get('/category', async (req, res) => {
+  try {
+    const category = await categoryModel.getMany
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const { category: Category } = prisma;
+import categoryModel from "../models";
 
 const categoryController = {
   getAll(req, res) {
@@ -97,4 +131,4 @@ const categoryController = {
   },
 };
 
-export default categoryController;
+export default categoryModel;*/
