@@ -1,8 +1,28 @@
 {
   "dependencies": {
-    "@material-ui/core": "^4.12.4",
-    "@material-ui/icons": "^4.11.3",
+    "autoprefixer": "^10.4.13",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "eslint": "^5.6.0",
+    "jest": "^23.6.0",
+    "postcss": "^8.4.19",
+    "postcss-cli": "^10.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
     "sequelize": "^6.25.5",
-    "sequelize-cli": "^6.5.2"
+    "sequelize-cli": "^6.5.2",
+    "tailwindcss": "^3.2.4"
+  },
+  "scripts": {
+    "start": "npm run wtach:css && react-scripts start",
+    "build": "npm run build:css && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build:css": "tailwindcss build src/style/main.css -o main.css",
+    "build:watch": "tailwindcss build src/style/main.css -o main.css --watch"
+  },
+  "devDependencies": {
+    "webpack": "^4.19.1"
   }
 }
