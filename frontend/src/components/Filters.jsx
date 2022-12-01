@@ -13,6 +13,7 @@ const categories = [
     id: 3,
     name: 'Accessoires',
   },
+  
 
 ];
 
@@ -38,17 +39,40 @@ const prices = [
     value: 'Effacer',
   },
 ];
-
+const materials = [
+  {
+    id: 1,
+    name: 'Toutes les matières',
+  },
+  {
+    id: 2,
+    name: 'Cotton',
+  },
+  {
+    id: 3,
+    name: 'Satin',
+  },
+  {
+    id: 4,
+    name: 'Sythetic',
+  },
+  {
+    id: 5,
+    name: 'Lin',
+  },
+]
 const Filters = ({
   activeCategory,
   setActiveCategory,
   activePrice,
   setActivePrice,
+  activeMaterial,
+  setActiveMaterial,
   products,
   setFilters,
 }) => {
   useEffect(() => {
-    if (activeCategory === 'Tout' && activePrice === '') {
+    if (activeCategory === 'Tout' && activePrice === '' && activeMaterial === 'Toutes les materières') {
       setFilters(products);
       return;
     }
@@ -57,7 +81,11 @@ const Filters = ({
       activeCategory === 'Tout' ? item : item.category === activeCategory
     );
 
-    const filterPrice = filterCategory.filter((item) =>
+    const filterMaterial = products.filter((item) =>
+      activeMaterial === 'Toutes les matières' ? item : item.material === activeMaterial
+    );
+
+    const filterPrice = filterCategory && filterMaterial.filter((item) =>
       activePrice === ''
         ? item
         : activePrice === 'ms20'
@@ -68,7 +96,8 @@ const Filters = ({
     );
 
     setFilters(filterPrice);
-  }, [activeCategory, activePrice, products, setFilters]);
+  }, [activeCategory, activePrice, products, setFilters, activeMaterial,
+    setActiveMaterial,]);
   return (
     <div>
       <div>
@@ -78,6 +107,19 @@ const Filters = ({
             key={item.id}
             className={`bg-white border-2 border-gray-500 rounded-lg px-4 py-2 mr-2 mb-2 ${
               activeCategory === item.name && 'bg-blue-500 text-white font-bold'
+            }`}
+          >
+            {item.name}
+          </button>
+        ))}
+      </div>
+      <div>
+        {materials.map((item) => (
+          <button
+            onClick={() => setActiveMaterial(item.name)}
+            key={item.id}
+            className={`bg-white border-2 border-gray-500 rounded-lg px-4 py-2 mr-2 mb-2 ${
+              activeMaterial === item.name && 'bg-yellow-500 text-white font-bold'
             }`}
           >
             {item.name}

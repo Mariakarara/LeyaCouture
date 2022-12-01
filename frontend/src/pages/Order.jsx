@@ -12,14 +12,15 @@ function Order() {
   const [cart, setCart] = useState([]);
 
   const [activeCategory, setActiveCategory] = useState('All');
+  const [activeMaterial, setActiveMaterial] = useState('Toutes les materières');
   const [activePrice, setActivePrice] = useState('');
   const [isShowCart, setIsShowCart] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        const data = await fetch('https://mocki.io/v1/9c745731-9760-4ec3-aa4c-0597cab507c2');
+        const data = await fetch('https://mocki.io/v1/3d955b5c-cc35-4418-94dd-478d7025d332');
         const products = await data.json();
 
         setProducts(products.data);
@@ -77,6 +78,8 @@ function Order() {
           activePrice={activePrice}
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
+          activeMaterial={activeMaterial}
+          setActiveMaterial={setActiveMaterial}
         />
       </div>
 
