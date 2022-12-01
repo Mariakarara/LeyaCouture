@@ -19,7 +19,7 @@ function Order() {
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        const data = await fetch('https://phones-dev.herokuapp.com/api/phones');
+        const data = await fetch('https://mocki.io/v1/9c745731-9760-4ec3-aa4c-0597cab507c2');
         const products = await data.json();
 
         setProducts(products.data);
